@@ -1,11 +1,22 @@
 import React from "react";
 import axios from "axios";
 import TodoItem from "../components/TodoItem";
+import ErrorComponent from "../components/ErrorComponent";
+import NoTodosMsg from "../components/NoTodosMsg";
 
 export default function TodoHome() {
   const [text, setText] = React.useState("");
   const [todo, setTodo] = React.useState([]);
   const [isChange, setIsChange] = React.useState("");
+
+  const [error, setError] = React.useState(false);
+
+  const handleChange = (e) => {
+    setText(e.target.value);
+    if (e.target.value.length > 0) {
+      setError(false);
+    }
+  };
 
   React.useEffect(() => {
     axios.get("todos/").then((res) => setTodo(res.data));
@@ -13,24 +24,36 @@ export default function TodoHome() {
 
   const addTodo = () => {
     if (isChange === "") {
-      axios
-        .post("todos/", { text: text })
-        .then((res) => {
-          setTodo([...todo, { _id: res.data._id, text: text }]);
-          setText("");
-        })
-        .catch((err) => console.log(err));
+      if (text.length > 2) {
+        axios
+          .post("todos/", { text: text })
+          .then((res) => {
+            setTodo([...todo, { _id: res.data._id, text: text }]);
+            setText("");
+          })
+          .catch((err) => console.log(err));
+      } else {
+        setError(true);
+      }
     } else {
-      axios
-        .post("todos/", {  text: text, _id: isChange })
-        .then((res) => {
-          setTodo(todo.map((val) => {
-            return val._id === isChange ? { _id: res.data._id, text: text } : val
-          }))
-          setText("");
-          setIsChange("");
-        })
-        .catch((err) => console.log(err));
+      if (text.length > 2) {
+        axios
+          .post("todos/", { text: text, _id: isChange })
+          .then((res) => {
+            setTodo(
+              todo.map((val) => {
+                return val._id === isChange
+                  ? { _id: res.data._id, text: text }
+                  : val;
+              })
+            );
+            setText("");
+            setIsChange("");
+          })
+          .catch((err) => console.log(err));
+      } else {
+        setError(true);
+      }
     }
   };
 
@@ -52,27 +75,34 @@ export default function TodoHome() {
   return (
     <div>
       <h1>TODO APP</h1>
-      <div className="inputNadd">
-        <input
-          type="text"
-          placeholder="Enter a Todo"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-        />
+      <div className="fullLayout">
+        <div className="inputNadd">
+          <input
+            type="text"
+            placeholder="Enter a Todo"
+            value={text}
+            onChange={handleChange}
+          />
 
-        <button onClick={addTodo}>{isChange ? "Update" : "Add"}</button>
-      </div>
-      <div className="todosLayout">
-        {todo.map((val, key) => {
-          return (
-            <TodoItem
-              key={key}
-              todoItem={val.text}
-              edit={() => editTodo(val._id, val.text)}
-              deleted={() => deleteTodo(val._id)}
-            />
-          );
-        })}
+          <button onClick={addTodo}>{isChange ? "Update" : "Add"}</button>
+        </div>
+        {error && <ErrorComponent />}
+        <div className="todosLayout">
+          {todo.length < 1 ? (
+            <NoTodosMsg />
+          ) : (
+            todo.map((val, key) => {
+              return (
+                <TodoItem
+                  key={key}
+                  todoItem={val.text}
+                  edit={() => editTodo(val._id, val.text)}
+                  deleted={() => deleteTodo(val._id)}
+                />
+              );
+            })
+          )}
+        </div>
       </div>
     </div>
   );

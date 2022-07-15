@@ -1,11 +1,21 @@
-import React from 'react'
+import React from "react";
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
 
-export default function TodoItem({ todoItem,edit,deleted}) {
+export default function TodoItem({ todoItem, edit, deleted }) {
   return (
-    <div style={{display: 'flex', padding: '20px'}}>
-        <p style={{padding: '10px',marginRight: '20px'}}>{todoItem}</p>
-        <button onClick={edit}>Edit</button>
-        <button onClick={deleted}>Delete</button>
+    <div className="todoItem">
+      <p>{todoItem}</p>
+      <div className="editNdel">
+        <EditIcon
+          onClick={edit}
+          style={{ fontSize: "30px", margin: "5px", color: "#11343d",cursor: 'pointer' }}
+        />
+        <DeleteIcon
+          onClick={deleted}
+          style={{ fontSize: "30px", margin: "5px", color: "#11343d", cursor: 'pointer' }}
+        />
+      </div>
     </div>
-  )
+  );
 }

@@ -4,6 +4,59 @@
   padding: 0;
   box-sizing: border-box;
   font-family: poppins;
+  
 }
 
+h1{
+  padding: 20px;
+  text-align: center;
+  background-color: #11343d;
+  color: white;
+  margin-bottom: 40px;
+}
+
+.inputNadd{
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.inputNadd input{
+  padding: 15px;
+  width: 450px;
+  font-size: 20px;
+  border-radius: 5px;
+  border: 2px solid #11343d;
+}
+.inputNadd button{
+  padding: 18px;
+  width: 100px;
+  margin-left: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #11343d;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+}
+.todoItem{
+  display: flex;
+  padding: 15px;
+  background-color: white;
+  margin: 10px;
+  width: 560px;
+  border-radius: 3px;
+  margin-left: auto;
+  margin-right: auto;
+  
+}
+.todoItem p{
+  font-size: 20px;
+  color: #11343d;
+  font-weight: 500;
+  padding: 10px;
+  
+}
+.editNdel{
+  margin-left: auto;
+}
 

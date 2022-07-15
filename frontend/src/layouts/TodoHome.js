@@ -7,51 +7,62 @@ export default function TodoHome() {
   const [todo, setTodo] = React.useState([]);
   const [isChange, setIsChange] = React.useState("");
 
-
   React.useEffect(() => {
     axios.get("todos/").then((res) => setTodo(res.data));
   }, []);
 
   const addTodo = () => {
-    if(isChange === ""){
-        axios.post("todos/", { text: text })
-        .then(() => {
-            setTodo([...todo, { text: text }])
-            setText("");
+    if (isChange === "") {
+      axios
+        .post("todos/", { text: text })
+        .then((res) => {
+          setTodo([...todo, { _id: res.data._id, text: text }]);
+          setText("");
         })
+        .catch((err) => console.log(err));
+    } else {
+      axios
+        .post("todos/", {  text: text, _id: isChange })
+        .then((res) => {
+          setTodo(todo.map((val) => {
+            return val._id === isChange ? { _id: res.data._id, text: text } : val
+          }))
+          setText("");
+          setIsChange("");
+        })
+        .catch((err) => console.log(err));
     }
-    
   };
 
   const editTodo = (id, newtext) => {
-    
-    setIsChange(id)
-    setText(newtext)
-    
-  }
+    setIsChange(id);
+    setText(newtext);
+  };
 
   const deleteTodo = (id) => {
     axios.delete(`todos/${id}`).then(() => {
-        setTodo(todo.filter((val) => {
-            return val._id !== id
-        }))
-    })
-  }
+      setTodo(
+        todo.filter((val) => {
+          return val._id !== id;
+        })
+      );
+    });
+  };
 
   return (
     <div>
-      <h1>Todo App</h1>
+      <h1>TODO APP</h1>
+      <div className="inputNadd">
+        <input
+          type="text"
+          placeholder="Enter a Todo"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+        />
 
-      <input
-        type="text"
-        placeholder="Enter a Todo"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-      />
-
-      <button onClick={addTodo}>{isChange ? "Update" : "Add"}</button>
-
-      <div>
+        <button onClick={addTodo}>{isChange ? "Update" : "Add"}</button>
+      </div>
+      <div className="todosLayout">
         {todo.map((val, key) => {
           return (
             <TodoItem

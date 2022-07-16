@@ -1,9 +1,9 @@
-import React from 'react'
+import React from "react";
 
 export default function NoTodosMsg() {
   return (
-    <div className='notodos'>
-        <p>No Todos</p>
+    <div className="notodos">
+      <p>No Todos</p>
     </div>
-  )
+  );
 }

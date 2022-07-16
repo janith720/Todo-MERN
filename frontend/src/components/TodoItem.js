@@ -9,11 +9,21 @@ export default function TodoItem({ todoItem, edit, deleted }) {
       <div className="editNdel">
         <EditIcon
           onClick={edit}
-          style={{ fontSize: "30px", margin: "5px", color: "#11343d",cursor: 'pointer' }}
+          style={{
+            fontSize: "30px",
+            margin: "5px",
+            color: "#11343d",
+            cursor: "pointer",
+          }}
         />
         <DeleteIcon
           onClick={deleted}
-          style={{ fontSize: "30px", margin: "5px", color: "#11343d", cursor: 'pointer' }}
+          style={{
+            fontSize: "30px",
+            margin: "5px",
+            color: "#11343d",
+            cursor: "pointer",
+          }}
         />
       </div>
     </div>

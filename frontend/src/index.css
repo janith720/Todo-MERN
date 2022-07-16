@@ -76,7 +76,7 @@ h1{
   color: #757575;
 }
 
-
+/* for responsive */
 @media only screen and (max-width: 680px){
   .inputNadd input{
     width: 100%;

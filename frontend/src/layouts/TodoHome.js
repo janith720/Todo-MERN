@@ -8,7 +8,6 @@ export default function TodoHome() {
   const [text, setText] = React.useState("");
   const [todo, setTodo] = React.useState([]);
   const [isChange, setIsChange] = React.useState("");
-
   const [error, setError] = React.useState(false);
 
   const handleChange = (e) => {
@@ -18,10 +17,12 @@ export default function TodoHome() {
     }
   };
 
+  //fetch all todos
   React.useEffect(() => {
     axios.get("todos/").then((res) => setTodo(res.data));
   }, []);
 
+  //add a new todo
   const addTodo = () => {
     if (isChange === "") {
       if (text.length > 2) {
@@ -36,6 +37,7 @@ export default function TodoHome() {
         setError(true);
       }
     } else {
+      //update a todo
       if (text.length > 2) {
         axios
           .post("todos/", { text: text, _id: isChange })
@@ -57,11 +59,13 @@ export default function TodoHome() {
     }
   };
 
+  //get the id todo for update
   const editTodo = (id, newtext) => {
     setIsChange(id);
     setText(newtext);
   };
 
+  //delete a todo
   const deleteTodo = (id) => {
     axios.delete(`todos/${id}`).then(() => {
       setTodo(
@@ -76,6 +80,7 @@ export default function TodoHome() {
     <div>
       <h1>TODO APP</h1>
       <div className="fullLayout">
+        {/* todo input and add button */}
         <div className="inputNadd">
           <input
             type="text"
@@ -86,7 +91,10 @@ export default function TodoHome() {
 
           <button onClick={addTodo}>{isChange ? "Update" : "Add"}</button>
         </div>
+
+        {/* error component */}
         {error && <ErrorComponent />}
+
         <div className="todosLayout">
           {todo.length < 1 ? (
             <NoTodosMsg />

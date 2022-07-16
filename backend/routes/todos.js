@@ -17,6 +17,6 @@ router.post("/", createTodo);
 
 router.delete("/:id", deleteTodo);
 
-router.patch("/:id", updateTodo);
+router.put("/:id", updateTodo);
 
 module.exports = router;

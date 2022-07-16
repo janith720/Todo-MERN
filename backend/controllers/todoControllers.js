@@ -41,20 +41,19 @@ const deleteTodo = async (req, res) => {
 };
 
 const updateTodo = async (req, res) => {
-  const { id, text } = req.body;
+  const { id } = req.params;
+  const { text } = req.body;
 
-  //check the id
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No todos" });
   }
 
-  const todo = await Todo.findByIdAndUpdate(id, { text });
+  const todo = await Todo.findByIdAndUpdate({ _id: id }, { text: text });
+  res.status(200).json(todo);
 
   if (!todo) {
-    return res.status(400).json({ error: "no todos" });
+    return res.status(400).json({ error: "no todos items" });
   }
-
-  res.status(200).json(todo);
 };
 
 module.exports = { createTodo, getTodos, getTodo, deleteTodo, updateTodo };

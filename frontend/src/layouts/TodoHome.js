@@ -40,7 +40,7 @@ export default function TodoHome() {
       //update a todo
       if (text.length > 2) {
         axios
-          .post("todos/", { text: text, _id: isChange })
+          .put(`todos/${isChange}`, { _id: isChange, text: text })
           .then((res) => {
             setTodo(
               todo.map((val) => {

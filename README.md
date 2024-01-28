@@ -2,25 +2,25 @@
 
   ## Overview
 
-  This TODO application is a simple yet powerful project developed using the MERN stack, which stands for MongoDB, Express.js, React.js, and Node.js. The app provides a user-friendly interface to manage tasks efficiently, allowing users to perform CRUD operations (Create, Read, Update, Delete) on their todo items.
+  This TODO application is a simple yet powerful project developed using the MERN stack, which stands for MongoDB, Express.js, React.js, and Node.js. The app provides a user-friendly       interface to manage tasks efficiently, allowing users to perform CRUD operations (Create, Read, Update, Delete) on their todo items.
 
   ## Features
 
-  Create TODO\n
-  Show TODO\n
-  Updated TODO\n
+  Create TODO \n
+  Show TODO \n
+  Updated TODO \n
   Delete Todo
 
   ## Tech Stack
 
   ### Frontend:
   
-  React.js for building the user interface.\n
+  React.js for building the user interface. \n
   Axios for making asynchronous requests to the backend.
 
   ### Backend:
   
-  Node.js and Express.js for server-side logic.\n
+  Node.js and Express.js for server-side logic. \n
   MongoDB for data storage, providing flexibility in managing todo items.
 
   ## User Interfaces

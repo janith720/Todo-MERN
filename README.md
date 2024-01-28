@@ -6,22 +6,22 @@
 
   ## Features
 
-  Create TODO \n
-  Show TODO \n
-  Updated TODO \n
-  Delete Todo
+  <li>Create TODO\
+  <li>Show TODO\
+  <li>Updated TODO\
+  <li>Delete Todo
 
   ## Tech Stack
 
   ### Frontend:
   
-  React.js for building the user interface. \n
-  Axios for making asynchronous requests to the backend.
+  <li>React.js for building the user interface.\
+  <li>Axios for making asynchronous requests to the backend.
 
   ### Backend:
   
-  Node.js and Express.js for server-side logic. \n
-  MongoDB for data storage, providing flexibility in managing todo items.
+  <li>Node.js and Express.js for server-side logic.\
+  <li>MongoDB for data storage, providing flexibility in managing todo items.
 
   ## User Interfaces
 
